@@ -1,4 +1,4 @@
-# NRS-568--ArcGIS-Python
+# NRS-568--ArcGIS-Python-Course
 This repository contains all information on my NRS 568 class.
 
 ABOUT ME:
