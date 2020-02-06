@@ -1,1 +1,13 @@
-fgfgf
+list_a = ['dog', 'cat', 'rabbit', 'hamster', 'gerbil']
+list_b = ['dog', 'hamster', 'snake']
+newList = []
+
+#To check for overlapping
+for i in list_a:
+    for z in list_b:
+        if i == z:
+            newList.append(i)
+print newList
+
+#To check for items that don't overlap
+
