@@ -1,3 +1,15 @@
 string = 'hi dee hi how are you mr dee'
 
+def word_count(str):
+    wordCount = dict()
+    words = str.split()
 
+    for word in words:
+        if word in wordCount:
+            wordCount[word] += 1
+        else:
+            wordCount[word] = 1
+
+    return wordCount
+
+print(word_count('hi dee hi how are you mr dee'))
