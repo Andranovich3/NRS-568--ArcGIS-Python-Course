@@ -10,4 +10,10 @@ for i in list_a:
 print newList
 
 #To check for items that don't overlap
+list_a.extend(list_b)
+for i in list_a:
+    if not i in newList:
+        newList.append(i)
+
+print newList
 
