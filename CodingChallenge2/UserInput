@@ -1,3 +1,8 @@
 age = input("What is your age?")
+print("Hope you didn't put anything besides a number in and break this!")
 retire = str(65 - age)
+i = 0
+while i < 3:
+    i = i+1
+    print(".")
 print "You are " + retire + " years from retirement!"
