@@ -1,1 +1,16 @@
-letter_scores = {"aeioulnrst": 1, "dg": 2, "bcmp": 3, "fhvwy": 4, "k": 5, "jx": 8, "qz": 10}
+letter_scores = {"a": 1, "c": 3, "b": 3, "e": 1, "d": 2, "g": 2,
+                 "f": 4, "i": 1, "h": 4, "k": 5, "j": 8, "m": 3,
+                 "l": 1, "o": 1, "n": 1, "q": 10, "p": 3, "s": 1,
+                 "r": 1, "u": 1, "t": 1, "w": 4, "v": 4, "y": 4,
+                 "x": 8, "z": 10}
+
+def wordScore(word):
+    score = 0
+    for letter in word:
+        letter = letter.lower()
+        score = score + letter_scores[letter]
+    return str(score)
+
+scrabbleWord = raw_input("Please enter a legal Scrabble word: ")
+
+print "Your score is: " + wordScore(scrabbleWord)
