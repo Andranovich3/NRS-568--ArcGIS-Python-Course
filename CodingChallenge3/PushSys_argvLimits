@@ -1,1 +1,35 @@
+##TASK 2##
 
+import sys
+
+#Not sure if I have to write something here to make sure the script and
+#the .bat file we want to take data talk to each other.
+
+a = 0
+b = 0
+c = 0
+i = 0
+
+#Create a method for reading and printing the arguments from the .bat file
+
+def batchReader(arg):
+    print(str(arg))
+
+#Give you some sweet spaghetti code to read each individual argument after
+#inserting some unnessecary text. I'm sure there's an easier way to read
+#in order, but it's late and I'm tired.
+
+while i < 1:
+  while a < 1:
+    batchReader(sys.argv[1])
+    print("Dun dun")
+    a = a+1
+  while b < 1:
+    batchReader(sys.argv[2])
+    print("Dun dun")
+    b = b+1
+  while c < 1:
+    batchReader(sys.argv[3])
+    print("Dun dun")
+    c = c+1
+  i = i+1
