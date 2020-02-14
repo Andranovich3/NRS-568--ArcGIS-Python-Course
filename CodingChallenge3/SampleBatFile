@@ -1,2 +1,7 @@
+## Simple Batch File Creation##
+# Not sure if I'm supposed to change the "Challenge_2.py to
+# the name of whatever python file I'm running, so just
+# changed it to my GitHub python file name.
+
 C:\Python27\ArcGIS10.5\python.exe Challenge_2.py THREE BLIND MICE
 pause
