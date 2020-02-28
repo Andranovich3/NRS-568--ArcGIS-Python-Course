@@ -36,6 +36,7 @@ for i in data:
                 string = ",".join(row)  # Creates an extracted line of data
                 string = string + "\n"  # Adds a new line command to start the next line of data
                 file.write(string)  # Actually prints the line of data in the CSV file
+        file.close() # Essential to avoid an error about unreadable column names
 
     # Converts the newly split CSV into a Shapefile
 
