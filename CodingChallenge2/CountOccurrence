@@ -1,15 +1,14 @@
-string = 'hi dee hi how are you mr dee'
+inputString = "hi dee hi how are you mr dee"
+wordCount = dict() # Creates a new, empty dictionary to hold keys:inputs
 
-def word_count(str):
-    wordCount = dict()
-    words = str.split()
+def countTheseWords(x): # Defines the function "countTheseWords"
+    words = x.split() # Splits the input into a list (words) by individual item
 
-    for word in words:
-        if word in wordCount:
-            wordCount[word] += 1
+    for i in words:
+        if i in wordCount:
+            wordCount[i] += 1 # Checks to see if i is in the dictionary, increments it by 1
         else:
-            wordCount[word] = 1
+            wordCount[i] = 1
+    return wordCount # Essential to getting a print statement with counts
 
-    return wordCount
-
-print(word_count('hi dee hi how are you mr dee'))
+print(countTheseWords(inputString))
