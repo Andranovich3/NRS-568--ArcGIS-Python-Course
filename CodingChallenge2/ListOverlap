@@ -1,23 +1,24 @@
 list_a = ['dog', 'cat', 'rabbit', 'hamster', 'gerbil']
 list_b = ['dog', 'hamster', 'snake']
-newList = []
+overlapList = []
+uniqueList = []
 
-#To check for overlapping
+# Find Overlapping Elements using a nested for loop
 for i in list_a:
     for z in list_b:
         if i == z:
-            newList.append(i)
-print newList
+            overlapList.append(i)
+print "The items " + str(overlapList) + " appear in both lists!"
 
-#To check for items that don't overlap
+# Find Unique Elements using two nested for loops
 
 for i in list_a:
     if not i in list_b:
-        newList.append(i)
+        uniqueList.append(i)
 
 for z in list_b:
     if not z in list_a:
-        newList.append(z)
+        uniqueList.append(z)
 
-print newList
+print "The items " + str(uniqueList) + " only appear once!"
 
