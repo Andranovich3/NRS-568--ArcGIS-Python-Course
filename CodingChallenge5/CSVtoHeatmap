@@ -41,9 +41,9 @@ for i in data:
     # Converts the newly split CSV into a Shapefile
 
     in_Table = i[0:2] + ".csv"  # Name of the newly split CSV
-    x_coords = "decimalLongitude"  # ERROR 000728: Field decimalLongitude does not exist within the table
-    y_coords = "decimalLatitude"  # But I can open the newly created CSV and see that field. Why is this happening?
-    out_Layer = "CombinedData"  # Name of the out_layer (Why don't we increment this filename? Won't this layer get overwritten next time it loops?)
+    x_coords = "decimalLongitude"
+    y_coords = "decimalLatitude"
+    out_Layer = "CombinedData"
     saved_Layer = i[0:2] + ".shp"  # Name of the new Shapefile
 
     spRef = arcpy.SpatialReference(4326)  # 4326 == WGS 1984
