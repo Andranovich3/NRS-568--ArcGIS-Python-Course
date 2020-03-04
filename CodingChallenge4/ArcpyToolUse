@@ -1,12 +1,18 @@
-For this coding challenge, I want you to find a particular tool that you like in arcpy. It could be a tool that you have
-used in GIS before or something new. Try browsing the full tool list to get some insight here
-(click Tool Reference on the menu list to the left).
+import arcpy # Imports arcpy toolbox
+arcpy.env.overwriteOutput = True # Overwrites files with teh same name to avoid the script from crashing during multiple iterations
 
-Set up the tool to run in Python, add some useful comments, and importantly, provide some example data in your repository
-(try to make it open source, such as Open Streetmap, or RI GIS. You can add it as a zip file to your repository.
+arcpy.env.workspace = r"E:\Python\Mike's Folder\Coastline" # Sets workspace, can be changed easily
 
-My only requirements are:
+inputFeatures = r"Coastline.shp" # Input shapefile that we want to buffer
+outputFeatures = r"CoastlineOutput.shp" # Name of the outputted buffer file
+distance = "100 meters" # Distance and units in which we want to buffer
+sideType = "FULL"
+lineEndType = "ROUND"
+dissolveOption = "NONE"
+dissolveField = "#"
+method = "PLANAR"
+arcpy.Buffer_analysis(inputFeatures, outputFeatures, distance, sideType,
+                      lineEndType, dissolveOption, dissolveField, method)
 
-Comment your code well.
-Ensure that the code will run with only a single change to a single variable (i.e. a base folder location).
-
+if arcpy.Exists(outputFeatures):
+    print "Created file successfully!" # Checks to see if the buffered shapefile was created successfully
