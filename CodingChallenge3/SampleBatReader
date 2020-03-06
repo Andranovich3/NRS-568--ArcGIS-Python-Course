@@ -2,13 +2,14 @@
 
 import sys
 
-
 a = 0
 b = 0
 c = 0
 i = 0
 
-#Create a method for reading and printing the arguments from the .bat file
+# Create a method for reading and printing the arguments from the .bat file
+# This .py file does not run the code, you must run the .bat file directly to
+# see the results of this code.
 
 def batchReader(arg):
     print(str(arg))
