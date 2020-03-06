@@ -2,8 +2,6 @@
 
 import sys
 
-#Not sure if I have to write something here to make sure the script and
-#the .bat file we want to take data talk to each other.
 
 a = 0
 b = 0
@@ -14,10 +12,6 @@ i = 0
 
 def batchReader(arg):
     print(str(arg))
-
-#Give you some sweet spaghetti code to read each individual argument after
-#inserting some unnessecary text. I'm sure there's an easier way to read
-#in order, but it's late and I'm tired.
 
 while i < 1:
   while a < 1:
