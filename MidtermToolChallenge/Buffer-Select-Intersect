@@ -2,7 +2,7 @@
 # by a sea level rise of 3 meters. The three tools I use are: buffer, select, and intersect. First, I create a buffer around
 # a RI Coastline shapefile that I acquired from RIGIS (WGS84). Next, I create a new shapefile of just Washington County from
 # a RI Towns shapefile that I acquired from Dr. Jason Parent's NRS 522 Advanced GIS class (RI State Plane meters). Lastly, I
-# create an intersected layer of the two areas to show the affects of sea level rise, especially for coastal areas in
+# create an intersected layer of the two areas to show the effects of sea level rise, especially for coastal areas in
 # Washington County. Note: Despite the layers being different projections, I believe I address that problem in line 29 by 
 # setting all output coordinate systems to WGS84. This may create minor distortion on the RI Towns shapefile, but it's
 # negligible, in my opinion.
