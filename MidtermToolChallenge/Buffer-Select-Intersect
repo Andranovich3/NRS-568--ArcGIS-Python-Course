@@ -1,11 +1,11 @@
 # For this midterm assignment, I've created a set of code which should check to see how Washington County would be affected
 # by a sea level rise of 3 meters. The three tools I use are: buffer, select, and intersect. First, I create a buffer around
-# a RI Coastline shapefile that I acquired from RIGIS (WGS84). Next, I create a new shapefile of just Washington County from
-# a RI Towns shapefile that I acquired from Dr. Jason Parent's NRS 522 Advanced GIS class (RI State Plane meters). Lastly, I
-# create an intersected layer of the two areas to show the effects of sea level rise, especially for coastal areas in
-# Washington County. Note: Despite the layers being different projections, I believe I address that problem in line 21 by 
-# setting all output coordinate systems to WGS84. This may create minor distortion on the RI Towns shapefile, but it's
-# negligible, in my opinion.
+# a RI Coastline shapefile that I acquired from RIGIS (Unprojected / Datum: WGS84). Next, I create a new shapefile of just
+# Washington County from a RI Towns shapefile that I acquired from Dr. Jason Parent's NRS 522 Advanced GIS class
+# (RI StatePlane meters / Datum: NAD83). Lastly, I create an intersected layer of the two areas to show the effects of sea
+# level rise, especially for coastal areas in Washington County. Note: Despite the layers being different projections, I
+# believe I address that problem in line 21 by setting all output coordinate systems to WGS84. This may create minor distortion
+# on the RI Towns shapefile, but it's negligible, in my opinion.
 
 import os
 import arcpy
@@ -39,7 +39,7 @@ if arcpy.Exists(outputShp):
 
 inputFeature = "towns.shp"
 outputFeature = os.path.join(outputDirectory, "WashingtonCounty.shp")
-whereClause = '"COUNTY" = ' + "'WASHINGTON'"
+whereClause = '"COUNTY" = ' + "'WASHINGTON'" # Very sensitive code because ArcMap is finicky
 
 arcpy.Select_analysis(inputFeature, outputFeature, whereClause)
 
@@ -58,6 +58,8 @@ if arcpy.Exists(outputLayer):
     print "Intersect file created successfully!\n" # Checks to see if the intersection shapefile was created successfully
     
 print "All files created successfully.\n"
+
+# A little bit of bonus spaghetti to finish it off
 
 userInput = raw_input("Would you like to delete the files now: yes or no? ")
 userInput = userInput.lower()
