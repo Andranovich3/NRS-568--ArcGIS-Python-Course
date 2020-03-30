@@ -1,6 +1,6 @@
 import arcpy # Imports arcpy toolbox
 arcpy.env.overwriteOutput = True # Overwrites files with the same name to avoid the script from
-                                    crashing during repeated trials
+                                 # crashing during repeated trials
 
 arcpy.env.workspace = r"E:\Python\Mike's Folder\Coastline" # Sets workspace, can be changed easily
 
