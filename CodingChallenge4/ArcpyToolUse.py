@@ -17,3 +17,4 @@ arcpy.Buffer_analysis(inputFeatures, outputFeatures, distance, sideType,
 
 if arcpy.Exists(outputFeatures):
     print "Created file successfully!" # Checks to see if the buffered shapefile was created successfully
+ 
