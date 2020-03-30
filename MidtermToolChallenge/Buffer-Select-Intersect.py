@@ -39,7 +39,9 @@ if arcpy.Exists(outputShp):
 
 inputFeature = "towns.shp"
 outputFeature = os.path.join(outputDirectory, "WashingtonCounty.shp")
-whereClause = '"COUNTY" = ' + "'WASHINGTON'" # Very sensitive code because ArcMap is finicky
+whereCategory = ""COUNTY"" # Can be changed, remember to enclose in double quotes and use all caps
+whereResponse = "'WASHINGTON'" # Canh be changed, remember to enclose in single quotes and use all caps
+whereClause = "'" + whereCategory + "= '" + """ + whereResponse + """ # Very sensitive code because ArcMap is finicky
 
 arcpy.Select_analysis(inputFeature, outputFeature, whereClause)
 
@@ -67,7 +69,7 @@ userInput = userInput.lower()
 if userInput == "yes":
     arcpy.Delete_management(outputDirectory)
     print "Smell ya later, midterm files."
-elif answer == "no":
+elif userInput == "no":
     print "Okay, keep enjoying these sweet, sweet files."
 else:
     print "Please enter yes or no."
