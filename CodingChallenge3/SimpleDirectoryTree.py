@@ -1,9 +1,9 @@
 ##Task 1##
 
-#Did this the quick and dirty way, nothing fancy here.
-#Created a new folder on the C drive, dumped all new folders/subfolders in there
-#Created each individually, then had to remove each one-by-one because "rmdir"
-#cannot remove folders with other stuff in it.
+# Did this the quick and dirty way, nothing fancy here.
+# Created a new folder on the C drive, dumped all new folders/subfolders in there
+# Created each individually, then had to remove each one-by-one because "rmdir"
+# cannot remove folders with other stuff in it.
 
 
 import os
