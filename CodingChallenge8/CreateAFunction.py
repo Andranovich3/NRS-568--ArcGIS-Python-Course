@@ -31,7 +31,7 @@ def checkFolder(a,b):
   rasterList = arcpy.ListRasters("*", "TIF")
   rasterList = [x for x in rasterList if "_BQA.tif" not in x]
   return rasterList
-  for raster in rasterList
+  for raster in rasterList:
     inRaster = raster
     inField = 'Value'
     outType = 'POLYGON'
