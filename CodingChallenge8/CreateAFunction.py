@@ -24,20 +24,16 @@ print listMultiplier(exampleList3, exampleFactor)
 
 # This function will read the contents of a folder, check for file type, and convert to feature.
 # a = your workspace
-# b = the function performed
+# b = file extension
 
 def checkFolder(a,b):
   arcpy.env.workspace = a
-  rasterList = arcpy.ListRasters("*", "TIF")
+  rasterList = arcpy.ListRasters("*", b)
   rasterList = [x for x in rasterList if "_BQA.tif" not in x]
-  return rasterList
-  for raster in rasterList:
-    inRaster = raster
-    inField = 'Value'
-    outType = 'POLYGON'
-    simplify = 'SIMPLIFY'
-    outFeatures = os.path.join(a, raster + ".shp")
-    arcpy.b(inRaster, inField, outType, simplify, outFeatures)
-
-checkFolder(YOUR WORKSPACE HERE, ConvertRasterToFeature_ra)
+  print "The files ending in " + b + " are " + rasterList
+  print "The number of files in that folder are " + len(rasterList)
+  
+checkFolder(YOUR WORKSPACE HERE, "TIF")
+checkFolder(YOUR WORKSPACE HERE, "XML")
+checkFolder(YOUR WORKSPACE HERE, "OVR")
 print "All done."
