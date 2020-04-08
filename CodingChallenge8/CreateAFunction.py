@@ -26,7 +26,7 @@ print listMultiplier(exampleList3, exampleFactor)
 # a = your workspace
 # b = the function performed
 
-def checkFolder(a,b)
+def checkFolder(a,b):
   arcpy.env.workspace = a
   rasterList = arcpy.ListRasters("*", "TIF")
   rasterList = [x for x in rasterList if "_BQA.tif" not in x]
