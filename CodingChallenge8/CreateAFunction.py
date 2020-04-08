@@ -4,7 +4,10 @@ import os
 import arcpy
 
 # Warm-up function to show handiness of process
-# This function will take a list(i) and multiply its contents by a factor(j), then fill and print the new results
+# This function will take a list and multiply its contents by a factor, then fill and print the new results.
+# i = list
+# j = factor
+
 def listMultiplier(i,j):
   newList = []
   for x in i:
@@ -22,7 +25,7 @@ print listMultiplier(exampleList, exampleFactor)
 print listMultiplier(exampleList2, exampleFactor)
 print listMultiplier(exampleList3, exampleFactor)
 
-# This function will read the contents of a folder, check for file type, and convert to feature.
+# This function will read the contents of a folder, check for file type, and count the number of that file.
 # a = your workspace
 # b = file extension
 
