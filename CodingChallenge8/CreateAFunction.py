@@ -30,10 +30,8 @@ def checkFolder(a,b):
   arcpy.env.workspace = a
   rasterList = arcpy.ListRasters("*", b)
   rasterList = [x for x in rasterList if "_BQA.tif" not in x]
-  print "The files ending in " + b + " are " + rasterList
-  print "The number of files in that folder are " + len(rasterList)
+  print "The files ending in " + b + " are " + rasterList + "."
+  print "The number of files in that folder are " + len(rasterList) + "."
   
 checkFolder(YOUR WORKSPACE HERE, "TIF")
-checkFolder(YOUR WORKSPACE HERE, "XML")
-checkFolder(YOUR WORKSPACE HERE, "OVR")
 print "All done."
