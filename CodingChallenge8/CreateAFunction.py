@@ -39,9 +39,9 @@ def checkFolder(a,b):
 checkFolder(YOUR WORKSPACE HERE, "TIF")
 print "All done."
 
-# This function will read the contents of a folder, list all shapefiles, check for line datasets and buffer them.
+# This function will set the workspace, check and print a list of desired feature class type, and buffer them.
 # x = your directory
-# y = file extension
+# y = feature class type
 # z = buffer distance
 
 def lineBuffer(x,y,z):
