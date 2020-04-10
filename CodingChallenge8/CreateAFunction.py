@@ -26,6 +26,7 @@ print listMultiplier(exampleList2, exampleFactor)
 print listMultiplier(exampleList3, exampleFactor)
 
 # This function will read the contents of a folder, check for file type, and count the number of that file.
+# To show this function's applicability, please use CodingChallenge8Data.zip
 # a = your workspace
 # b = file extension
 
@@ -40,6 +41,7 @@ checkFolder(YOUR WORKSPACE HERE, "TIF")
 print "All done."
 
 # This function will set the workspace, check and print a list of desired feature class type, and buffer them.
+# To show this function's applicability, please use CodingChallenge8Data2.zip
 # x = your directory
 # y = feature class type
 # z = buffer distance
