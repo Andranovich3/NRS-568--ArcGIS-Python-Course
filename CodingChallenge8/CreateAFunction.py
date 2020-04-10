@@ -38,3 +38,27 @@ def checkFolder(a,b):
   
 checkFolder(YOUR WORKSPACE HERE, "TIF")
 print "All done."
+
+# This function will read the contents of a folder, list all shapefiles, check for line datasets and buffer them.
+# x = your directory
+# y = file extension
+# z = buffer distance
+
+def lineBuffer(x,y,z):
+  arcpy.env.workspace = x
+  bufferFiles = arcpy.ListFeatureClasses("*", y)
+  print bufferFiles
+  for i in bufferFiles:
+    inFeature = i + ".shp"
+    outFeature = i[0:3] + "BufferOutput.shp"
+    bufferDistance = z
+    arcpy.Buffer_analysis(inFeature, outFeature, bufferDistance)
+
+
+directory = "YOUR DIRECTORY HERE"
+fileType = "ENTER FILE TYPE HERE" # Should be "Polygon" / "Polyline" / "Point"
+distance = "ENTER BUFFER DISTANCE AND UNIT HERE" # Should be entered "'Numerical Distance' ' ' 'lowercase unit'"
+
+lineBuffer(directory, fileType, distance)
+print "Buffering analysis completed."
+    
