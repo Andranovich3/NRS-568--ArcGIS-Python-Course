@@ -74,3 +74,11 @@ for i in locations_list:
 
         lineArray.removeAll()
         del cur
+        
+    # Clip radiating line to coast
+    in_features = OutFeat
+    clip = r"NB_Coastline.shp"
+    out_feature = "radLines_clip_" + i[1] + ".shp"
+
+    arcpy.Clip_analysis(in_features, clip, out_feature)
+    print "Clipped file for " + i[1] + " created successfully!"
