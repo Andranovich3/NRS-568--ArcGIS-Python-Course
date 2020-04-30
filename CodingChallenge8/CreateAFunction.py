@@ -42,13 +42,13 @@ fileType = "TIF" # Change raster file type here
 checkRaster(workspace, fileType)
 print "All done."
 
-# This function will set the workspace, check and print a list of desired feature class type, and buffer them.
+# This function will set the workspace, print a list of desired feature class type, and buffer them.
 # To show this function in action, please use CodingChallenge8Data2.zip
 # x = your directory
 # y = feature class type
 # z = buffer distance
 
-def lineBuffer(x, y, z):
+def shapeBuffer(x, y, z):
     arcpy.env.workspace = x
     bufferFiles = arcpy.ListFeatureClasses("*", y)
     print "The files of " + y + " feature class type are " + str(bufferFiles)
@@ -62,5 +62,5 @@ directory = r"C:\Users\Public\PythonClass\Class_8\CodingChallenge8Data2" # Chang
 fileType = "Polyline"  # Should be "Polygon" / "Polyline" / "Point"
 distance = "100 feet"  # Should be entered "'### (unit of distance)"
 
-lineBuffer(directory, fileType, distance)
+shapeBuffer(directory, fileType, distance)
 print "Buffering analysis completed."
