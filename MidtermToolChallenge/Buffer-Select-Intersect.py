@@ -9,56 +9,56 @@
 
 import os
 import arcpy
-arcpy.env.overwriteOutput = True # Overwrites files when saving to avoid the script from crashing during repeated trials
+arcpy.env.overwriteOutput = True  # Overwrites files when saving to avoid the script from crashing during repeated trials
 
-yourDirectory = r"" # **Change contents of r"_" to whatever your directory will be.**
-arcpy.env.workspace = yourDirectory # Sets the workspace for files
+yourDirectory = r"C:\Users\Public\PythonClass\Data"  # **Change contents of r"_" to whatever your directory will be.**
+arcpy.env.workspace = yourDirectory  # Sets the workspace for files
+outputDirectory = os.path.join(yourDirectory, "midtermTestFiles")  # Sets up a temporary file folder
+if not os.path.exists(outputDirectory):  # Checks for folder's existence (it should not exist on the first trial)
+    os.mkdir(outputDirectory)  # Creates the actual folder in the directory
 
-outputDirectory = os.path.join(yourDirectory, "midtermTestFiles") # Sets up a temporary file folder
-if not os.path.exists(outputDirectory): # Checks for folder's existence (it should not exist on the first trial)
-    os.mkdir(outputDirectory) # Creates the actual folder in the directory
-
-arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(4326) # Sets all output coordinates to WGS84
+arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(4326)  # Sets all output coordinates to WGS84
 
 # Tool 1: Creating a buffer around a RI coastline shapefile
 
-inputShp = r"Coastline.shp" # Input shapefile that we want to buffer
-outputShp = os.path.join(outputDirectory, "CoastlineBuffer_3meters.shp") # Output file joins created output directory
-distance = "3 meter" # Distance and units in which we want to buffer
+inputShp = r"Coastline.shp"  # Input shapefile that we want to buffer
+outputShp = os.path.join(outputDirectory, "CoastlineBuffer_3meters.shp")  # Output file joins created output directory
+distance = "3 meter"  # Distance and units in which we want to buffer
 sideType = "FULL"
 lineEndType = "ROUND"
 dissolveOption = "NONE"
 dissolveField = "#"
 method = "PLANAR"
+
 arcpy.Buffer_analysis(inputShp, outputShp, distance, sideType, lineEndType, dissolveOption, dissolveField, method)
 
 if arcpy.Exists(outputShp):
-    print "Buffer file created successfully!" # Checks to see if the buffered shapefile was created successfully
+    print "Buffer file created successfully!"  # Checks to see if the buffered shapefile was created successfully
 
 # Tool 2: Creating a new layer based on a selection by County
 
 inputFeature = "towns.shp"
 outputFeature = os.path.join(outputDirectory, "WashingtonCounty.shp")
-whereCategory = ""COUNTY"" # Can be changed, remember to enclose in double quotes and use all caps
-whereResponse = "'WASHINGTON'" # Canh be changed, remember to enclose in single quotes and use all caps
-whereClause = "'" + whereCategory + "= '" + """ + whereResponse + """ # Very sensitive code because ArcMap is finicky
+whereCategory = "COUNTY"  # Change selection category here, remember to use all caps
+whereResponse = 'WASHINGTON'  # Change selection criteria here, remember to use all caps
+whereClause = "{} = '{}'".format(arcpy.AddFieldDelimiters(inputFeature, whereCategory), whereResponse)
 
 arcpy.Select_analysis(inputFeature, outputFeature, whereClause)
 
 if arcpy.Exists(outputFeature):
-    print "Selection file created successfully!" # Checks to see if the selection shapefile was created successfully
-    
+    print "Selection file created successfully!"  # Checks to see if the selection shapefile was created successfully
+
 # Tool 3: Create an intersected layer of the two above layers
 
-inputLayers = [outputShp, outputFeature] # Input layers must be formatted into a list. List created while declaring variable.
-outputLayer = os.path.join(outputDirectory, "WashingtonCountyCoastlineIntersect.shp")
-joinAttributes = "ALL" # Joins all attributes from both tables into the new shapefile
+inputLayers = [outputShp, outputFeature]  # Input layers must be formatted into a list. List created while declaring variable.
+outputLayer = os.path.join(outputDirectory, whereResponse + "CoastlineIntersect.shp")
+joinAttributes = "ALL"  # Joins all attributes from both tables into the new shapefile
 
 arcpy.Intersect_analysis(inputLayers, outputLayer, joinAttributes)
 
 if arcpy.Exists(outputLayer):
-    print "Intersect file created successfully!\n" # Checks to see if the intersection shapefile was created successfully
-    
+    print "Intersect file created successfully!\n"  # Checks to see if the intersection shapefile was created successfully
+
 print "All files created successfully.\n"
 
 # A little bit of bonus spaghetti to finish it off
