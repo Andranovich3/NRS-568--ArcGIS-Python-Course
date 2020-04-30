@@ -60,7 +60,7 @@ def shapeBuffer(x, y, z):
 
 directory = r"C:\Users\Public\PythonClass\Class_8\CodingChallenge8Data2" # Change workspace here
 fileType = "Polyline"  # Should be "Polygon" / "Polyline" / "Point"
-distance = "100 feet"  # Should be entered "'### (unit of distance)"
+distance = "100 feet"  # Should be entered "### (unit of distance)"
 
 shapeBuffer(directory, fileType, distance)
 print "Buffering analysis completed."
