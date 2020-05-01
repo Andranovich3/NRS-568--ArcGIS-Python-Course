@@ -9,33 +9,32 @@ import arcpy
 class Toolbox(object):
     def __init__(self):
         """Define the toolbox (the name of the toolbox is the name of the .pyt file)."""
-        self.label = "AndranovichFinalToolbox"
+        self.label = "AndranovichFinalToolbox" # What the toolbox will be called in ArcMap
         self.alias = ""
-        # List of tool classes associated with this toolbox
-        self.tools = [ListRasters, Buffer10meters, Produce_NDVI]
+        self.tools = [ListRasters, Buffer10meters, Produce_NDVI]  # List of tool classes associated with this toolbox
 
 
 class ListRasters(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
-        self.label = "List Rasters Tool"
+        self.label = "List Rasters Tool" # What the tool will be called in ArcMap
         self.description = "This tool will search a desired folder and list all raster files of a specified type."
         self.canRunInBackground = False
 
     def getParameterInfo(self):
         """Define parameter definitions"""
         parameters = []
-        input_line = arcpy.Parameter(name="input_line",
-                                     displayName="Enter the desired folder:",
-                                     datatype="DEFolder",
-                                     parameterType="Required",
-                                     direction="Input")
+        input_line = arcpy.Parameter(name="input_line", # Variable name
+                                     displayName="Enter the desired folder:", # Text that will be displayed in GUI
+                                     datatype="DEFolder", # Type of data that can be inputted/outputted
+                                     parameterType="Required", # Required|Optional|Derived
+                                     direction="Input") # Input|Output
         parameters.append(input_line)
-        file_type = arcpy.Parameter(name="file_type",
-                                    displayName="Enter the raster file extension:",
-                                    datatype="GPString",
-                                    parameterType="Required",
-                                    direction="Input")
+        file_type = arcpy.Parameter(name="file_type", # Variable name
+                                    displayName="Enter the raster file extension:", # Text that will be displayed in GUI
+                                    datatype="GPString",  # Type of data that can be inputted/outputted
+                                    parameterType="Required",  # Required|Optional|Derived
+                                    direction="Input") # Input|Output
         parameters.append(file_type)
         return parameters
 
@@ -70,7 +69,7 @@ class ListRasters(object):
 class Buffer10meters(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
-        self.label = "Buffer 10-meters Tool"
+        self.label = "Buffer 10-meters Tool" # What the tool will be called in ArcMap
         self.description = "This tool will take up to three feature class objects and apply a 10-meter buffer."
         self.canRunInBackground = False
 
@@ -180,7 +179,7 @@ class Buffer10meters(object):
 class Produce_NDVI(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
-        self.label = "NDVI Calculation Tool"
+        self.label = "NDVI Calculation Tool" # What the tool will be called in ArcMap
         self.description = "This tool will take in two .TIF bands and produce an NDVI output from them."
         self.canRunInBackground = False
 
