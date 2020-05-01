@@ -173,7 +173,7 @@ class Buffer10meters(object):
             method = "PLANAR"
             arcpy.Buffer_analysis(inputFeatures, outputFeatures, distance, sideType,
                                   lineEndType, dissolveOption, dissolveField, method)
-        arcpy.AddMessage("Buffering of files completed!)
+        arcpy.AddMessage("Buffering of files completed!")
         return
 
 
@@ -230,5 +230,5 @@ class Produce_NDVI(object):
 
         arcpy.gp.RasterCalculator_sa('Float("' + band_5 + '"-"' + band_4 + '") / Float("' + band_5 + '"+"' + band_4 + '")',
         ndvi_output)
-        arcpy.AddMessage("NDVI calculations completed!)
+        arcpy.AddMessage("NDVI calculations completed!")
         return
