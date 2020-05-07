@@ -10,14 +10,14 @@ import arcpy
 from math import radians, sin, cos
 arcpy.env.overwriteOutput = True
 
-yourDirectory = r"C:\Users\Public\PythonClass\CodingChallenge9"  # Change directory here
+yourDirectory = r"C:\Course_ArcGIS_Python_Students\Andarnovich-NRS-568--ArcGIS-Python-Course\CodingChallenge9\Data"  # Change directory here
 arcpy.env.workspace = yourDirectory  # Sets the workspace for files
 outputDirectory = os.path.join(yourDirectory, "TestFiles")  # Sets up a temporary file folder
 
 if not os.path.exists(outputDirectory):  # Checks for folder's existence
     os.mkdir(outputDirectory)  # Creates the folder in the directory
 
-locations = r"Site_Locations.shp"
+locations = os.path.join(yourDirectory, "Site_Locations.shp") #AD Coded location correctly as you switch into your TestFiles Workspace
 locations_list = []
 
 # Creates a list of (x,y) coordinates and site names (stored as tuple)
@@ -90,7 +90,7 @@ for a in locations_list:
 for b in radLinesList:
     arcpy.env.workspace = outputDirectory
     in_features = b
-    clip = r"NB_Coastline.shp"
+    clip = os.path.join(yourDirectory, "NB_Coastline.shp") #AD Coded location of input coastline correctly
     out_feature = "radLines_clip_" + b[9:11] + ".shp"
     xy_tolerance = ""
 
@@ -114,11 +114,11 @@ with arcpy.da.SearchCursor(locations, ['Site_Code']) as cursor:
 
 # Creates 10 meter buffer around each site location point
 for x in siteCodeList:
-    sites = arcpy.MakeFeatureLayer_management("Site_Locations.shp")
+    sites = arcpy.MakeFeatureLayer_management(os.path.join(yourDirectory, "Site_Locations.shp")) #AD fixed
     whereCategory = "Site_Code"
     whereResponse = x
     whereClause = "{} = '{}'".format(arcpy.AddFieldDelimiters(sites, whereCategory), whereResponse)
-
+    print whereClause
     arcpy.SelectLayerByAttribute_management(sites, "NEW_SELECTION", whereClause)
 
     in_class = sites
@@ -133,34 +133,52 @@ for x in siteCodeList:
     arcpy.Buffer_analysis(in_class, out_class, buffer_distance, line_side, line_end_type,
                       dissolve_option, dissolve_field, method)
 
-    bufferedSites.append(out_class)
-    print "Buffer created around site " + x + "!"
+#     bufferedSites.append(out_class)
+#     print "Buffer created around site " + x + "!"
+#
+# print "Buffered site list: " + str(len(bufferedSites))
+#
+# #SelectByLocation - Intersect - Buffer > FetchLines
+# for y in bufferedSites:
 
-#SelectByLocation - Intersect - Buffer > FetchLines
-for y in bufferedSites:
+    #AD issue with your code was that m_output at this point was always C3...
+
+    m_output = "fetchLines_" + x + ".shp"
+
     arcpy.MakeFeatureLayer_management(m_output,"m_output_1")
-    arcpy.MakeFeatureLayer_management(y,"buffer_1")
+    arcpy.MakeFeatureLayer_management("Buffer_" + x + ".shp", "buffer_1")
 
     arcpy.SelectLayerByLocation_management("m_output_1", "INTERSECT", "buffer_1", "", "NEW_SELECTION", "NOT_INVERT")
-    arcpy.CopyFeatures_management("m_output_1", "fetchLines_" + y[7:9] + "_36Lines.shp")
+    arcpy.CopyFeatures_management("m_output_1", "fetchLines_" + x + "_36Lines.shp")
 
     # Add geometry attribute to calculate length of fetch lines
-    in_geo = "fetchLines_" + y[7:9] + "_36Lines.shp"
+    in_geo = "fetchLines_" + x + "_36Lines.shp"
     properties = "LENGTH"
     length_unit = ""
     area_unit = ""
     coordinate_system = ""
 
     arcpy.AddGeometryAttributes_management(in_geo, properties, length_unit, area_unit, coordinate_system)
-    print "Shapefile containing all 36 lines for " + y + " created successfully!"
+    print "Shapefile containing all 36 lines for " + x + " created successfully!"
 
     in_table = in_geo
-    out_table = "stats_table" + y[7:9] + ".dbf"
+    out_table = "stats_table" + x + ".dbf"
     stat_fields = [['LENGTH', 'SUM'], ['LENGTH', 'STD']]
 
     arcpy.Statistics_analysis(in_table, out_table, stat_fields)
-    finalStatsList.append("stats_table" + y[7:9] + ".dbf")
-    
-    # I can't get any of the other statistics tables to display results, just the final one (C3). I know this is 
+    finalStatsList.append(out_table)
+
+    # I can't get any of the other statistics tables to display results, just the final one (C3). I know this is
     # because I must keep overwriting the previous table, but I don't know how to fix it and I've been at this for
     # long enough. Appreciate the help!
+print len(finalStatsList)
+print "Producing summary statistics"
+
+arcpy.Merge_management(finalStatsList, "outputStats.dbf")
+
+for i in finalStatsList:
+    print i
+    with arcpy.da.SearchCursor(i, ['FREQUENCY','SUM_LENGTH','STD_LENGTH']) as cursor:
+        for row in cursor:
+            print row
+
